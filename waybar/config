@@ -69,7 +69,7 @@
 		},
     "custom/power": {
         "format": "󰐥",
-        "on-click": "sleep 0.15 && powermenu"
+        "on-click": "/home/jesse/.config/rofi/scripts/powermenu_t1"
     }
 }
 

@@ -51,38 +51,65 @@ in
     variant = "";
   };
 
+  boot.kernelModules = ["vcan" "can_raw"];
+
+  # VCAN for ECU Simulation
+  systemd.network.enable = true;
+
+  systemd.network.netdevs."vcan0" = {
+    netdevConfig = {
+      Name = "vcan0";
+      Kind = "vcan";
+    };
+  };
+
+  systemd.network.networks."vcan0" = {
+    matchConfig.Name = "vcan0";
+    networkConfig = {
+      LinkLocalAddressing = "no";
+    };
+  };
+
+  # Enable Docker
+  virtualisation.docker.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jesse = {
     isNormalUser = true;
     description = "Jesse Guillory";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
     	vesktop
-	zsh
-	pkgs.starship
-	nerd-fonts.bigblue-terminal
-	nerd-fonts.fira-code
-	ripgrep
-	lazygit
-    	gdu
-	nodejs
-	python313Packages.pynvim
-	bottom
-	rustup
-	cargo
-	fzf
-	zoxide
-	yazi
-	gitkraken
-	spotify
-	vtsls
-	prettierd
-	lua-language-server
-	pyright
-	stylua
+	    zsh
+	    pkgs.starship
+	    nerd-fonts.bigblue-terminal
+	    nerd-fonts.fira-code
+	    ripgrep
+	    lazygit
+      gdu
+	    nodejs
+	    python313Packages.pynvim
+	    bottom
+	    rustup
+	    cargo
+	    fzf
+	    zoxide
+	    yazi
+	    gitkraken
+	    spotify
+	    vtsls
+	    prettierd
+	    lua-language-server
+	    pyright
+	    stylua
+	    bitwarden-desktop
+	    flameshot
 
-	# Unstable
-	unstable.tombi
+	    # CAN for ECU SIM
+	    can-utils
+
+	    # Unstable
+	    unstable.tombi
     ];
     shell = pkgs.zsh;
   };
@@ -112,6 +139,9 @@ in
     hyprlock
     hyprpaper
     rofi-wayland
+	  gnupg
+	  pinentry-curses
+	  openssl
   ];
 
   # programs.nix-ld.enable = true;
@@ -141,6 +171,13 @@ in
       command = "hyprland";
       user = "jesse";
     };
+  };
+
+  services.pcscd.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryPackage = pkgs.pinentry-curses;
+    enableSSHSupport = true;
   };
 
   environment.pathsToLink = [
