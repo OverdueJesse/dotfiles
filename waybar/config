@@ -61,6 +61,7 @@
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "format": "{icon}",
+        "on-click": "pavucontrol",
         "format-muted": "󰖁",
 				"format-icons": {
 					"default": ["", "", "󰕾"]
