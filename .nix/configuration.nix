@@ -51,6 +51,8 @@ in
     variant = "";
   };
 
+  security.polkit.enable = true;
+
   boot.kernelModules = ["vcan" "can_raw"];
 
   # VCAN for ECU Simulation
@@ -105,6 +107,9 @@ in
 	    bitwarden-desktop
 	    flameshot
 
+	    # Gaming
+	    lutris
+
 	    # CAN for ECU SIM
 	    can-utils
 
@@ -142,6 +147,7 @@ in
 	  gnupg
 	  pinentry-curses
 	  openssl
+	  lxqt.lxqt-policykit
   ];
 
   # programs.nix-ld.enable = true;
@@ -152,6 +158,21 @@ in
   programs.firefox.enable = true;
   programs.zsh = {
     enable = true;
+  };
+
+  hardware.graphics = {
+    enable = true;
+  };
+  services.xserver.videoDrivers = ["nvidia"];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    open = false;
+    nvidiaSettings = true;
+
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
   # Enable sound with pipewire
@@ -187,6 +208,14 @@ in
   # mounting disks
   services.gvfs.enable = true;
   services.udisks2.enable = true;
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
+
+  programs.steam.extraCompatPackages = [ pkgs.proton-ge-bin];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
