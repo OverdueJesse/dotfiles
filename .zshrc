@@ -11,3 +11,4 @@ export GPG_TTY=$(tty)
 
 alias ls="lsd -a"
 alias cd="z"
+alias grep="rg"

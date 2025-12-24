@@ -105,7 +105,12 @@ in
 	    pyright
 	    stylua
 	    bitwarden-desktop
-	    flameshot
+	    qbittorrent
+
+	    # NordVPN
+	    openresolv
+	    wireguard-tools
+	    wgnord
 
 	    # Gaming
 	    lutris
@@ -118,6 +123,10 @@ in
     ];
     shell = pkgs.zsh;
   };
+
+  # VPN
+  services.resolved.enable = false;
+  networking.resolvconf.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -135,6 +144,7 @@ in
     swayidle
     swaylock
     grim
+    slurp
     wl-clipboard
     kdePackages.dolphin
     git

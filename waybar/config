@@ -39,8 +39,10 @@
 			"signal": 8
 		},
     "clock": {
-        "tooltip-format": "{:%A, %B %d, %Y}",
-        "format": "{:%H:%M}"
+        // "tooltip-format": "{:%A, %B %d, %Y}",
+        // "format": "{:%H:%M}"
+        "format": "{:%I:%M %p}",
+        "format-alt": "{:%d-%m-%Y}",
     },
     "battery": {
         "states": {
