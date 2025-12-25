@@ -31,17 +31,18 @@
 
 * {
   font-family:
-    Cantarell,
+    CartographCF Nerd Font,
     Symbols Nerd Font;
   font-weight: bolder;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 window#waybar {
-  background-color: @crust;
+  background-color: rgba(17, 17, 27, 0.5);
   color: @text;
   transition-property: background-color;
   transition-duration: 0.5s;
+  border-radius: 8px;
 }
 
 window#waybar.hidden {
@@ -82,6 +83,7 @@ button {
   text-shadow: inherit;
   background: @crust;
   border: @crust;
+  border-radius: 8px;
 }
 
 #workspaces button {
@@ -131,21 +133,45 @@ button {
   margin: 0 4px;
 }
 
+.modules-center {
+  margin: 4px 0 4px 0;
+  opacity: 1;
+}
+
+.modules-left {
+  margin: 4px 0 4px 1rem;
+  opacity: 1;
+}
+
+.modules-right {
+  margin: 4px 1rem 4px 0;
+  opacity: 1;
+}
+
 /* If workspaces is the leftmost module, reduce left margin */
 .modules-left > widget:first-child > #workspaces {
   margin-left: 2px;
+}
+
+#tray * {
+  border-radius: 8px;
+  padding: 4px;
+}
+
+#tray *:hover {
+  background-color: @crust;
 }
 
 #clock {
   color: @text;
 }
 
-#custom-pacman {
-  color: @peach;
-}
-
 #pulseaudio {
   color: @mauve;
+}
+
+#pulseaudio:hover {
+  background-color: @crust;
 }
 
 #pulseaudio.muted {
@@ -160,17 +186,13 @@ button {
   color: @surface2;
 }
 
-#battery {
-  color: @green;
-}
-
-#battery.warning:not(.charging) {
-  color: @red;
-}
-
 #custom-power {
   color: @maroon;
   margin-right: 5px;
+}
+
+#custom-power:hover {
+  background-color: @crust;
 }
 
 #keyboard-state > label {
@@ -188,5 +210,3 @@ button {
 #scratchpad.empty {
   background-color: transparent;
 }
-
-/* vim: ft=sass */

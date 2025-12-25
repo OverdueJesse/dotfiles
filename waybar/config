@@ -2,6 +2,10 @@
     "layer": "top",
     "height": 30,
     "spacing": 5,
+    "margin-top": 6,
+    "margin-left": 6,
+    "margin-right": 6,
+    "margin-bottom": 0,
     // Choose the order of the modules
     "modules-left": [
         "hyprland/workspaces"
@@ -10,12 +14,10 @@
         "hyprland/window"
     ],
     "modules-right": [
-				"tray",
-        "custom/pacman",
+		"tray",
         "pulseaudio",
         "network",
-        "battery",
-				"clock",
+		"clock",
         "custom/power"
 		],
 		"hyprland/window": {
@@ -27,49 +29,27 @@
         "on-click": "activate"
     },
     "tray": {
-        // "icon-size": 21,
         "spacing": 10
     },
-		"custom/pacman": {
-			"interval": 3600,
-			"return-type": "json",
-			"exec": "pacman-updates",
-			"exec-if": "exit 0",
-			"on-click": "$TERMINAL -e paru; pkill -SIGRTMIN+8 waybar",
-			"signal": 8
-		},
     "clock": {
-        // "tooltip-format": "{:%A, %B %d, %Y}",
-        // "format": "{:%H:%M}"
         "format": "{:%I:%M %p}",
         "format-alt": "{:%d-%m-%Y}",
-    },
-    "battery": {
-        "states": {
-            "warning": 20
-        },
-        "format": "{icon}",
-        "format-icons": [ "󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹" ],
-        "format-charging": "󰂄",
-        "format-warning": "󰂃",
-				"tooltip-format": "{capacity}% capacity"
     },
     "network": {
         "format-wifi": "󰤨",
         "format-disconnected": "󰤭",
-				"tooltip-format": "Connected to {essid}",
-				"on-click": "hyprctl dispatch exec '[float]' '$TERMINAL -e nmtui'"
+		"tooltip-format": "Connected to {essid}",
+		"on-click": "hyprctl dispatch exec '[float]' '$TERMINAL -e nmtui'"
     },
     "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
         "format": "{icon}",
         "on-click": "pavucontrol",
         "format-muted": "󰖁",
-				"format-icons": {
-					"default": ["", "", "󰕾"]
-				},
-				"tooltip-format": "{volume}% volume"
+		"format-icons": {
+			"default": ["", "", "󰕾"]
 		},
+		"tooltip-format": "{volume}% volume"
+	},
     "custom/power": {
         "format": "󰐥",
         "on-click": "/home/jesse/.config/rofi/scripts/powermenu_t1"

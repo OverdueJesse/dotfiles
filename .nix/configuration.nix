@@ -11,7 +11,13 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      <home-manager/nixos>
     ];
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+
+  home-manager.users.jesse = import /home/jesse/.config/home-manager/home.nix;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -106,6 +112,7 @@ in
 	    stylua
 	    bitwarden-desktop
 	    qbittorrent
+	    fastfetch
 
 	    # NordVPN
 	    openresolv
@@ -139,6 +146,7 @@ in
     wget
     kitty
     waybar
+    kdePackages.dolphin
     xdg-desktop-portal-hyprland
     wireplumber
     swayidle
@@ -146,7 +154,6 @@ in
     grim
     slurp
     wl-clipboard
-    kdePackages.dolphin
     git
     gzip
     unzip
